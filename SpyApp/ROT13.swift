@@ -11,6 +11,12 @@ import Foundation
 struct ROT13: Cipher {
     
     func encode(_ plaintext: String, secret: String) -> String {
+        
+        if (plaintext.isEmpty || isAlphaNumeric (plaintext) ) {
+            return "please enter a valid text"
+        }
+        
+    
         var encoded = ""
         var shiftBy = UInt32("13")!
         
@@ -41,5 +47,37 @@ struct ROT13: Cipher {
         
         return decoded
     }
+    
+    func isAlphaNumeric (_ key: String) -> Bool  {
+        
+        var hasAlpha = false
+        
+        var hasNumber = false
+        
+        let newKey = key.uppercased()
+        
+        for character in newKey {
+            
+            
+            if (character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90){
+                
+                hasAlpha = true
+            }
+                
+            else {
+                
+                if  UInt32(String(character)) != nil {
+                    
+                    hasNumber = true
+                }
+            }
+        }
+        
+        return hasAlpha && hasNumber
+        
+    }
+    
+    
+    
     
 }

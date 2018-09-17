@@ -17,8 +17,11 @@ struct CeaserCipher: Cipher {
             }
             
             let shiftBy = UInt32(secret)!
+            
+            let newText = plaintext.uppercased()
 
-        for character in plaintext {
+        for character in newText {
+            
             var unicode = character.unicodeScalars.first!.value
             if (String(character) == "Z" && shiftBy > 0){
                 unicode = 64
@@ -58,7 +61,7 @@ struct CeaserCipher: Cipher {
     
     func isOnlyAlpha (_ key: String) -> Bool {
         
-        var hasAlpha = false
+        var hasOnlyAlpha = true
         
         
         
@@ -67,14 +70,15 @@ struct CeaserCipher: Cipher {
         for character in newKey {
             
             
-            if (character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90){
+            if !(character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90) {
                 
-                hasAlpha = true
+                hasOnlyAlpha = false
             }
                 
             
         }
-        return hasAlpha
+        
+        return hasOnlyAlpha
 
     }
 }

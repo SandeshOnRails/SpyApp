@@ -18,6 +18,21 @@ struct SubstitutionCipher: Cipher {
         // dictionary of chars to substitute
         var startAt: UInt32 = 97
         
+        if  (!isOnlyAlpha(plaintext)) {
+            
+            return "please enter valid text for key"
+        }
+        
+        if  (!isOnlyAlpha(secret)) {
+            
+            return "please enter valid text for secret"
+        }
+        
+        if secret.count > 26 {
+            
+            return "secret cannot be more than 26 chars [A-Z]"
+        }
+        
         // replace all a-z chars with secret chars
         
     
@@ -44,6 +59,16 @@ struct SubstitutionCipher: Cipher {
         
         // replace all a-z chars with secret chars
         
+        if  (!isOnlyAlpha(plaintext)) {
+            
+            return "please enter valid text for key"
+        }
+        
+        if  (!isOnlyAlpha(secret)) {
+            
+            return "please enter valid text for secret"
+        }
+        
         for character in secret {
             
             let toReplaceWith = String (character)
@@ -58,5 +83,28 @@ struct SubstitutionCipher: Cipher {
         return newText
         
 }
+    
+    func isOnlyAlpha (_ key: String) -> Bool {
+        
+        var hasOnlyAlpha = true
+        
+        
+        
+        let newKey = key.uppercased()
+        
+        for character in newKey {
+            
+            
+            if !(character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90) {
+                
+                hasOnlyAlpha = false
+            }
+            
+            
+        }
+        
+        return hasOnlyAlpha
+        
+    }
     
 }

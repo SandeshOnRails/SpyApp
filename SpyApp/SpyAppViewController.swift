@@ -31,6 +31,8 @@ class SpyAppViewController: UIViewController {
     
     // We will talk about this method during lecture
     @IBAction func cipherButtonPressed(_ sender: UIButton) {
+        
+        
         let key = sender.titleLabel!.text!
         cipher = factory.cipher(for: key)
     }
@@ -56,6 +58,7 @@ class SpyAppViewController: UIViewController {
         
         let key = sender.titleLabel!.text!
         cipher = factory.cipher(for: key)
+        secret.text = "13"
         
     }
     
