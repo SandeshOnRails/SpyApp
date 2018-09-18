@@ -62,12 +62,12 @@ struct AlphaNumericCesarCipher: Cipher {
             
             if isChar(character) {
                 
-                let shiftedUnicode = Int32(unicode) + shiftByForChar
+                var shiftedUnicode = Int32(unicode) + shiftByForChar
                 
                 if (shiftedUnicode < 65) {
                     
                     let toActuallyShift = 64 - shiftedUnicode
-                    let shiftedUnicode = 90 - toActuallyShift
+                     shiftedUnicode = 90 - toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     print ("ShiftedUnicode < 65: \(shiftedUnicode)")
@@ -77,7 +77,7 @@ struct AlphaNumericCesarCipher: Cipher {
                  else if (shiftedUnicode > 90) {
                     
                     let toActuallyShift = shiftedUnicode - 90
-                    let shiftedUnicode = 64 + toActuallyShift
+                     shiftedUnicode = 64 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     print ("ShiftedUnicode > 90: \(shiftedUnicode)")
@@ -87,8 +87,8 @@ struct AlphaNumericCesarCipher: Cipher {
                     
                 else {
                     
-                let toActuallyShift = shiftedUnicode - 90
-                let shiftedUnicode = 65 + toActuallyShift
+                
+                 let shiftedUnicode = Int32(unicode) + shiftByForChar
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
                 print ("ShiftedUnicode neutral: \(shiftedUnicode)")
@@ -98,12 +98,12 @@ struct AlphaNumericCesarCipher: Cipher {
             }
                 
             else {
-                let shiftedUnicode = Int32(unicode) + shiftByForDigit
+                var shiftedUnicode = Int32(unicode) + shiftByForDigit
                 
                 if (shiftedUnicode < 48) {
                     
                     let toActuallyShift = 47 - shiftedUnicode
-                    let shiftedUnicode = 57 + toActuallyShift
+                    shiftedUnicode = 57 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     continue
@@ -111,12 +111,16 @@ struct AlphaNumericCesarCipher: Cipher {
                 if (shiftedUnicode > 57) {
                     
                     let toActuallyShift = shiftedUnicode - 57
-                    let shiftedUnicode = 47 + toActuallyShift
+                    shiftedUnicode = 47 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     continue
                 }
                 
+                let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                encoded = encoded + shiftedCharacter
+                print ("ShiftedUnicode neutral: \(shiftedUnicode)")
+
             }
         }
             
