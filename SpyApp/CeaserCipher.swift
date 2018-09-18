@@ -12,17 +12,31 @@ struct CeaserCipher: Cipher {
         if isOnlyAlpha(plaintext) {
         var encoded = ""
             
-            if UInt32(secret) == nil {
+            if Int32(secret) == nil {
                 return "enter a valid secret key"
             }
             
-            let shiftBy = UInt32(secret)!
+            
+            
+            var shiftBy = Int32(secret)!
+            
+            if Int32(secret)! <= -26 {
+                
+                shiftBy = Int32(secret)! % -26
+                
+            }
+            
+            if Int32(secret)! >= 26 {
+                
+                shiftBy = Int32(secret)! % 26
+                
+            }
             
             let newText = plaintext.uppercased()
 
         for character in newText {
             
-            var unicode = character.unicodeScalars.first!.value
+            var unicode = Int32(character.unicodeScalars.first!.value)
             if (String(character) == "Z" && shiftBy > 0){
                 unicode = 64
             }
@@ -31,6 +45,7 @@ struct CeaserCipher: Cipher {
             }
             let shiftedUnicode = unicode + shiftBy
             let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+            print (shiftedUnicode)
             encoded = encoded + shiftedCharacter
         }
         return encoded
