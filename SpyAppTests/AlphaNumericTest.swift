@@ -20,28 +20,28 @@ class AlphaNumericTest: XCTestCase {
     }
     
     func test_cylic_negative() {
-        let plaintext = "A"
+        let plaintext = "A0"
         let result = cipher.encode (plaintext, secret: "-1")
-        XCTAssertEqual("Z", result)
+        XCTAssertEqual("Z9", result)
     }
     
     func test_cyclic_positive () {
-        let plaintext = "Z"
+        let plaintext = "Z9"
         let result = cipher.encode (plaintext, secret: "1")
-        XCTAssertEqual("A", result)
+        XCTAssertEqual("A0", result)
         
     }
     
     func test_isMessageToEncryptValid () {
         let plaintext = "Z1!"
         let result = cipher.encode (plaintext, secret: "1")
-        XCTAssertEqual("please enter valid words with alphabets only", result)
+        XCTAssertEqual("Please enter a valid alpha numeric string", result)
     }
     
     func test_isSecretKeyToEncryptValid () {
         let plaintext = "hello"
         let result = cipher.encode (plaintext, secret: "!")
-        XCTAssertEqual("enter a valid secret key",result)
+        XCTAssertEqual("Enter a valid shift key",result)
     }
     
     

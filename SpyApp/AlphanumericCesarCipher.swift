@@ -136,15 +136,17 @@ struct AlphaNumericCesarCipher: Cipher {
         let newKey = key.uppercased()
         for character in newKey {
                 if (character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90) {
-                    hasAlpha = true
+                   continue
+                }
+                else if UInt32(String(character)) != nil {
+                   continue
                 }
                 else {
-                    if  UInt32(String(character)) != nil {
-                        hasNumber = true
-                    }
-                }
+                  return false
+                  }
+            
             }
-        return hasAlpha && hasNumber
+        return true
 
     }
     
