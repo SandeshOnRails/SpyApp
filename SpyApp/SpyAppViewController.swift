@@ -7,20 +7,21 @@ class SpyAppViewController: UIViewController {
     @IBOutlet weak var output: UILabel!
     let factory = CipherFactory()
     var cipher: Cipher!
-
+    @IBOutlet weak var cipherType: UISegmentedControl!
     
     override func viewDidLoad() {
-    
     super.viewDidLoad()
-    
-    cipher = CeaserCipher()
-    
-    
+        cipher = CeaserCipher()
     }
-   
     
     
-   
+    @IBAction func setType(_ sender: Any) {
+        
+        let allCiphers = ["cesar", "alphanumcesar", "ROT13", "subcipher"]
+        cipher = self.factory.cipher(for: allCiphers[cipherType.selectedSegmentIndex])
+        print ("Cipher is: \(allCiphers[cipherType.selectedSegmentIndex])")
+    }
+    
     
     @IBAction func decodeButtonPressed(_ sender: Any) {
         
@@ -30,14 +31,7 @@ class SpyAppViewController: UIViewController {
     }
     
     // We will talk about this method during lecture
-    @IBAction func cipherButtonPressed(_ sender: UIButton) {
-        
-        
-        let key = sender.titleLabel!.text!
-        cipher = factory.cipher(for: key)
-    }
-    
-    
+   
     @IBAction func encodeButtonPressed(_ sender: Any) {
         
         let plaintext = input.text!
@@ -47,29 +41,7 @@ class SpyAppViewController: UIViewController {
     }
     
     
-    @IBAction func alphanumcesar(_ sender: UIButton) {
-        
-        let key = sender.titleLabel!.text!
-        cipher = factory.cipher(for: key)
-        
-    }
     
-    @IBAction func rot13(_ sender: UIButton) {
-        
-        let key = sender.titleLabel!.text!
-        cipher = factory.cipher(for: key)
-        secret.text = "13"
-        
-    }
-    
-    @IBAction func subcipher(_ sender: UIButton) {
-        
-        let key = sender.titleLabel!.text!
-        print(key)
-        cipher = factory.cipher(for: key)
-        
-        
-    }
     
 }
 

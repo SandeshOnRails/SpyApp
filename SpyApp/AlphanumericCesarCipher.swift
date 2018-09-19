@@ -11,97 +11,62 @@ import Foundation
 struct AlphaNumericCesarCipher: Cipher {
     
     func encode(_ plaintext: String, secret: String) -> String {
-        
         var encoded = ""
-
         if (isAlphaNumeric(plaintext)){
-            
             if Int32(secret) == nil {
                 return "Enter a valid shift key"
             }
             if Int32(secret) == 0 {
                 return "The shift key should be more than 0"
             }
-            
-            
             var shiftByForChar = Int32(secret)!
-            
             var shiftByForDigit = Int32(secret)!
-            
             if shiftByForChar <= -26 {
-                
                 shiftByForChar = Int32(secret)! % -26
-                
             }
-            
             if shiftByForChar >= 26 {
-                
                 shiftByForChar = Int32(secret)! % 26
-                
             }
-            
             if shiftByForDigit <= -9 {
-                
                 shiftByForDigit = Int32(secret)! % -9
             }
-            
             if shiftByForDigit >= 9 {
-                
                 shiftByForDigit = Int32(secret)! % 9
             }
-            
             print("Char: \(shiftByForChar)")
             let newText = plaintext.uppercased()
             print ("Digit: \(shiftByForDigit)")
-            
         for character in newText {
-            
-            var unicode = character.unicodeScalars.first!.value
-            
+            let unicode = character.unicodeScalars.first!.value
             print ("Unicode: \(unicode)")
-            
             if isChar(character) {
-                
                 var shiftedUnicode = Int32(unicode) + shiftByForChar
-                
                 if (shiftedUnicode < 65) {
-                    
                     let toActuallyShift = 64 - shiftedUnicode
                      shiftedUnicode = 90 - toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     print ("ShiftedUnicode < 65: \(shiftedUnicode)")
-
                     continue
                 }
                  else if (shiftedUnicode > 90) {
-                    
                     let toActuallyShift = shiftedUnicode - 90
                      shiftedUnicode = 64 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     print ("ShiftedUnicode > 90: \(shiftedUnicode)")
-
                      continue
                 }
-                    
                 else {
-                    
-                
-                 let shiftedUnicode = Int32(unicode) + shiftByForChar
+                let shiftedUnicode = Int32(unicode) + shiftByForChar
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
                 print ("ShiftedUnicode neutral: \(shiftedUnicode)")
-
-                    
                 }
             }
-                
             else {
                 var shiftedUnicode = Int32(unicode) + shiftByForDigit
-                
                 if (shiftedUnicode < 48) {
-                    
                     let toActuallyShift = 47 - shiftedUnicode
                     shiftedUnicode = 57 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
@@ -109,29 +74,22 @@ struct AlphaNumericCesarCipher: Cipher {
                     continue
                 }
                 if (shiftedUnicode > 57) {
-                    
                     let toActuallyShift = shiftedUnicode - 57
                     shiftedUnicode = 47 + toActuallyShift
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     continue
                 }
-                
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
                 print ("ShiftedUnicode neutral: \(shiftedUnicode)")
-
             }
         }
-            
         }
         else {
-            
             print(plaintext)
-            
             return "Please enter a valid alpha numeric string"
         }
-            
         return encoded
     }
     
@@ -139,19 +97,13 @@ struct AlphaNumericCesarCipher: Cipher {
         
         if (isAlphaNumeric(plaintext)){
             var encoded = ""
-            
             if UInt32(secret) == nil {
                 return "Enter a valid shift key"
             }
-            
             let shiftBy = UInt32(secret)!
-            
             let newText = plaintext.uppercased()
-            
             for character in newText {
-                
                 var unicode = character.unicodeScalars.first!.value
-                
                 if (String(character) == "Z" && shiftBy > 0){
                     unicode = 64
                 }
@@ -164,8 +116,6 @@ struct AlphaNumericCesarCipher: Cipher {
                 if unicode <= 57 && shiftBy > 0 {
                     unicode = 47
                 }
-                
-                
                 let shiftedUnicode = unicode + shiftBy
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
@@ -181,33 +131,19 @@ struct AlphaNumericCesarCipher: Cipher {
     }
     
     func isAlphaNumeric (_ key: String) -> Bool  {
-        
         var hasAlpha = false
-        
         var hasNumber = false
-        
         let newKey = key.uppercased()
-        
         for character in newKey {
-            
-            
-                if (character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90){
-                    
+                if (character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90) {
                     hasAlpha = true
                 }
-                
                 else {
-                    
                     if  UInt32(String(character)) != nil {
-                        
                         hasNumber = true
                     }
                 }
             }
-        
-        
-        print (hasNumber)
-        print (hasAlpha)
         return hasAlpha && hasNumber
 
     }

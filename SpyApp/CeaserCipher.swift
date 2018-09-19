@@ -10,44 +10,45 @@ struct CeaserCipher: Cipher {
     func encode(_ plaintext: String, secret: String) -> String {
         
         if isOnlyAlpha(plaintext) {
-        var encoded = ""
-            
-            if Int32(secret) == nil {
+               var encoded = ""
+               if Int32(secret) == nil {
                 return "enter a valid secret key"
-            }
+                }
+               var shiftBy = Int32(secret)!
             
-            
-            
-            var shiftBy = Int32(secret)!
-            
-            if Int32(secret)! <= -26 {
-                
+               if Int32(secret)! <= -26 {
                 shiftBy = Int32(secret)! % -26
-                
-            }
-            
-            if Int32(secret)! >= 26 {
-                
+                }
+              if Int32(secret)! >= 26 {
                 shiftBy = Int32(secret)! % 26
-                
-            }
-            
+                }
             let newText = plaintext.uppercased()
-
-        for character in newText {
-            
-            var unicode = Int32(character.unicodeScalars.first!.value)
-            if (String(character) == "Z" && shiftBy > 0){
-                unicode = 64
+            for character in newText {
+            let unicode = character.unicodeScalars.first!.value
+            var shiftedUnicode = Int32(unicode) + shiftBy
+            if (shiftedUnicode < 65) {
+                let toActuallyShift = 64 - shiftedUnicode
+                shiftedUnicode = 90 - toActuallyShift
+                let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                encoded = encoded + shiftedCharacter
+                print ("ShiftedUnicode < 65: \(shiftedUnicode)")
+                continue
             }
-            if (String(character) == "A" && shiftBy < 0){
-                unicode = 91
+            else if (shiftedUnicode > 90) {
+                let toActuallyShift = shiftedUnicode - 90
+                shiftedUnicode = 64 + toActuallyShift
+                let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                encoded = encoded + shiftedCharacter
+                print ("ShiftedUnicode > 90: \(shiftedUnicode)")
+                continue
             }
-            let shiftedUnicode = unicode + shiftBy
-            let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
-            print (shiftedUnicode)
-            encoded = encoded + shiftedCharacter
-        }
+            else {
+                let shiftedUnicode = Int32(unicode) + shiftBy
+                let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                encoded = encoded + shiftedCharacter
+                print ("ShiftedUnicode neutral: \(shiftedUnicode)")
+                }
+            }
         return encoded
         }
             else {
@@ -56,43 +57,61 @@ struct CeaserCipher: Cipher {
     }
     
     func decode(_ plaintext: String, secret: String) -> String {
-        
-        var decoded = ""
-        let unShiftBy = UInt32(secret)!
-        
-        for character in plaintext {
+        if isOnlyAlpha(plaintext) {
+            var encoded = ""
+            if Int32(secret) == nil {
+                return "enter a valid secret key"
+            }
+            var shiftBy = Int32(secret)!
             
-            let unicode = character.unicodeScalars.first!.value
-            
-            let char = unicode - unShiftBy
-            
-            let shiftedCharacter = String(UnicodeScalar(UInt8(char)))
-            decoded = decoded + shiftedCharacter
+            if Int32(secret)! <= -26 {
+                shiftBy = Int32(secret)! % -26
+            }
+            if Int32(secret)! >= 26 {
+                shiftBy = Int32(secret)! % 26
+            }
+            let newText = plaintext.uppercased()
+            for character in newText {
+                let unicode = character.unicodeScalars.first!.value
+                var shiftedUnicode = Int32(unicode) - shiftBy
+                if (shiftedUnicode < 65) {
+                    let toActuallyShift = 64 - shiftedUnicode
+                    shiftedUnicode = 90 - toActuallyShift
+                    let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                    encoded = encoded + shiftedCharacter
+                    print ("ShiftedUnicode < 65: \(shiftedUnicode)")
+                    continue
+                }
+                else if (shiftedUnicode > 90) {
+                    let toActuallyShift = shiftedUnicode - 90
+                    shiftedUnicode = 64 + toActuallyShift
+                    let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                    encoded = encoded + shiftedCharacter
+                    print ("ShiftedUnicode > 90: \(shiftedUnicode)")
+                    continue
+                }
+                else {
+                    let shiftedUnicode = Int32(unicode) + shiftBy
+                    let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
+                    encoded = encoded + shiftedCharacter
+                    print ("ShiftedUnicode neutral: \(shiftedUnicode)")
+                }
+            }
+            return encoded
         }
-        
-        
-        return decoded
+        else {
+            return "please enter valid words with alphabets only"
+        }
     }
     
     func isOnlyAlpha (_ key: String) -> Bool {
-        
         var hasOnlyAlpha = true
-        
-        
-        
         let newKey = key.uppercased()
-        
         for character in newKey {
-            
-            
             if !(character.unicodeScalars.first!.value >= 65 && character.unicodeScalars.first!.value <= 90) {
-                
                 hasOnlyAlpha = false
             }
-                
-            
         }
-        
         return hasOnlyAlpha
 
     }
