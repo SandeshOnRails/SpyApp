@@ -12,6 +12,7 @@
 		02060015214B1CE500660FBF /* SubstitutionCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02060014214B1CE500660FBF /* SubstitutionCipher.swift */; };
 		02A76DDE215303560070AEB4 /* CesarCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A76DDD215303560070AEB4 /* CesarCipherTests.swift */; };
 		02A76DE0215308AA0070AEB4 /* AlphaNumericTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A76DDF215308AA0070AEB4 /* AlphaNumericTest.swift */; };
+		02A76DE221531A7F0070AEB4 /* Rot13Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A76DE121531A7F0070AEB4 /* Rot13Test.swift */; };
 		970E4DD52138EC8600BA3EE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970E4DD42138EC8600BA3EE9 /* AppDelegate.swift */; };
 		970E4DD72138EC8600BA3EE9 /* SpyAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970E4DD62138EC8600BA3EE9 /* SpyAppViewController.swift */; };
 		970E4DDA2138EC8600BA3EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970E4DD82138EC8600BA3EE9 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		02060014214B1CE500660FBF /* SubstitutionCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstitutionCipher.swift; sourceTree = "<group>"; };
 		02A76DDD215303560070AEB4 /* CesarCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CesarCipherTests.swift; sourceTree = "<group>"; };
 		02A76DDF215308AA0070AEB4 /* AlphaNumericTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaNumericTest.swift; sourceTree = "<group>"; };
+		02A76DE121531A7F0070AEB4 /* Rot13Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rot13Test.swift; sourceTree = "<group>"; };
 		970E4DD12138EC8600BA3EE9 /* SpyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		970E4DD42138EC8600BA3EE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		970E4DD62138EC8600BA3EE9 /* SpyAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyAppViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				970E4DEB2138EC8700BA3EE9 /* Info.plist */,
 				02A76DDD215303560070AEB4 /* CesarCipherTests.swift */,
 				02A76DDF215308AA0070AEB4 /* AlphaNumericTest.swift */,
+				02A76DE121531A7F0070AEB4 /* Rot13Test.swift */,
 			);
 			path = SpyAppTests;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				970E4DEA2138EC8700BA3EE9 /* SpyAppTests.swift in Sources */,
 				02A76DE0215308AA0070AEB4 /* AlphaNumericTest.swift in Sources */,
 				02A76DDE215303560070AEB4 /* CesarCipherTests.swift in Sources */,
+				02A76DE221531A7F0070AEB4 /* Rot13Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

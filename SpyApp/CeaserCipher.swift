@@ -9,12 +9,14 @@ struct CeaserCipher: Cipher {
 
     func encode(_ plaintext: String, secret: String) -> String {
         
-        if isOnlyAlpha(plaintext) {
+        if !plaintext.isEmpty && isOnlyAlpha(plaintext) {
                var encoded = ""
                if Int32(secret) == nil {
                 return "enter a valid secret key"
                 }
                var shiftBy = Int32(secret)!
+            
+            print (shiftBy)
             
                if Int32(secret)! <= -26 {
                 shiftBy = Int32(secret)! % -26
@@ -31,7 +33,7 @@ struct CeaserCipher: Cipher {
                 shiftedUnicode = 90 - toActuallyShift
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
-                print ("ShiftedUnicode < 65: \(shiftedUnicode)")
+                //print ("ShiftedUnicode < 65: \(shiftedUnicode)")
                 continue
             }
             else if (shiftedUnicode > 90) {
@@ -39,14 +41,14 @@ struct CeaserCipher: Cipher {
                 shiftedUnicode = 64 + toActuallyShift
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
-                print ("ShiftedUnicode > 90: \(shiftedUnicode)")
+                //print ("ShiftedUnicode > 90: \(shiftedUnicode)")
                 continue
             }
             else {
                 let shiftedUnicode = Int32(unicode) + shiftBy
                 let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                 encoded = encoded + shiftedCharacter
-                print ("ShiftedUnicode neutral: \(shiftedUnicode)")
+                //print ("ShiftedUnicode neutral: \(shiftedUnicode)")
                 }
             }
         return encoded
@@ -57,6 +59,10 @@ struct CeaserCipher: Cipher {
     }
     
     func decode(_ plaintext: String, secret: String) -> String {
+        
+        print("to be decoded: \(plaintext)")
+        
+        
         if isOnlyAlpha(plaintext) {
             var encoded = ""
             if Int32(secret) == nil {
@@ -91,7 +97,7 @@ struct CeaserCipher: Cipher {
                     continue
                 }
                 else {
-                    let shiftedUnicode = Int32(unicode) + shiftBy
+                    let shiftedUnicode = Int32(unicode) - shiftBy
                     let shiftedCharacter = String(UnicodeScalar(UInt8(shiftedUnicode)))
                     encoded = encoded + shiftedCharacter
                     print ("ShiftedUnicode neutral: \(shiftedUnicode)")
