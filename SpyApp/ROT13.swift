@@ -11,6 +11,7 @@ import Foundation
 struct ROT13: Cipher {
     
     func encode(_ plaintext: String, secret: String) -> String {
+        
         if !plaintext.isEmpty && isOnlyAlpha(plaintext) {
             var encoded = ""
             if Int32(secret) == nil {
@@ -65,7 +66,7 @@ struct ROT13: Cipher {
             if Int32(secret) == nil {
                 return "enter a valid secret key"
             }
-            var shiftBy = Int32(secret)!
+            var shiftBy = Int32(13)
             
             if Int32(secret)! <= -26 {
                 shiftBy = Int32(secret)! % -26
